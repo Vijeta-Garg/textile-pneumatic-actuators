@@ -25,12 +25,13 @@
   }
   .grid {
     display: grid;
-    grid-template-columns: var(--act-w) var(--hand-w) var(--act-w) var(--hand-w);
+    /* the 1px middle column plus two gaps gives a wider gap between the two pairs */
+    grid-template-columns: var(--act-w) var(--hand-w) 1px var(--act-w) var(--hand-w);
     column-gap: 12px;
     row-gap: 24px;
   }
-  /* extra space between the two actuator/hands pairs */
-  .grid > :nth-child(4n + 3) { margin-left: 13px; }
+  .grid > :nth-child(4n + 3) { grid-column: 4; }
+  .grid > :nth-child(4n + 4) { grid-column: 5; }
 
   figure { margin: 0; display: flex; flex-direction: column; }
   video {
@@ -48,8 +49,6 @@
     text-align: center;
     padding-top: 11px;
   }
-  /* The new effleurage clip is portrait: show the whole frame */
-  .actuator video.portrait { object-fit: contain; }
 
   /* Massage-hands tiles: card with uppercase grey caption */
   .hands { background: var(--card); border-radius: 4px; overflow: hidden; }
@@ -90,14 +89,14 @@
   /* Narrow screens: one actuator/hands pair per row */
   @media (max-width: 1150px) {
     .grid { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
-    .grid > :nth-child(4n + 3) { margin-left: 0; }
+    .grid > :nth-child(n) { grid-column: auto; }
   }
 </style>
 </head>
 <body>
   <main class="grid">
     <figure class="actuator">
-      <video class="portrait" src="videos/effleurage_actuator.mp4" autoplay muted loop playsinline></video>
+      <video src="videos/effleurage_actuator.mp4" autoplay muted loop playsinline></video>
       <figcaption>1. Effleurage Actuator</figcaption>
     </figure>
     <figure class="hands">
