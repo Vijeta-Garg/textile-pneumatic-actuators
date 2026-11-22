@@ -3,37 +3,45 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Core Actuators vs Hand Massage</title>
+<title>Textile Pneumatic Actuators for Mechanotherapy</title>
 <style>
   :root {
     --bg: #000;
     --card: #111;
     --text: #fff;
     --muted: #8a8a8a;
-    --act-w: 314px;   /* actuator tile width (16:9-ish) */
-    --hand-w: 210px;  /* massage-hands tile width */
+    --gap: 16px;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; background: var(--bg); color: var(--text); }
   body {
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
-    padding: 24px 16px;
+    padding: 32px 24px;
+  }
+  h1 {
+    font-weight: normal;
+    font-size: clamp(22px, 2.4vw, 34px);
+    text-align: center;
+    margin: 0 0 32px;
   }
   .grid {
+    width: min(1640px, 100%);
     display: grid;
-    /* the 1px middle column plus two gaps gives a wider gap between the two pairs */
-    grid-template-columns: var(--act-w) var(--hand-w) 1px var(--act-w) var(--hand-w);
-    column-gap: 12px;
-    row-gap: 24px;
+    /* actuator, hands, spacer, actuator, hands (spacer + 2 gaps separates the pairs) */
+    grid-template-columns: 3fr 2fr 0 3fr 2fr;
+    column-gap: var(--gap);
+    row-gap: 32px;
+    align-items: start;
   }
   .grid > :nth-child(4n + 3) { grid-column: 4; }
   .grid > :nth-child(4n + 4) { grid-column: 5; }
 
-  figure { margin: 0; display: flex; flex-direction: column; }
+  figure { margin: 0; display: flex; flex-direction: column; min-width: 0; }
   video {
     display: block;
     width: 100%;
@@ -43,36 +51,36 @@
   }
 
   /* Actuator tiles: video with a plain white caption beneath */
-  .actuator video { aspect-ratio: 310 / 172; border-radius: 4px; }
+  .actuator video { aspect-ratio: 310 / 172; border-radius: 6px; }
   .actuator figcaption {
-    font-size: 14px;
+    font-size: clamp(14px, 1.15vw, 18px);
     text-align: center;
-    padding-top: 11px;
+    padding-top: 12px;
   }
 
   /* Massage-hands tiles: card with uppercase grey caption */
-  .hands { background: var(--card); border-radius: 4px; overflow: hidden; }
+  .hands { background: var(--card); border-radius: 6px; overflow: hidden; }
   .hands video { aspect-ratio: 206 / 164; }
   .hands figcaption {
-    font-size: 12px;
+    font-size: clamp(12px, 0.95vw, 15px);
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--muted);
     text-align: center;
-    line-height: 1.15;
-    padding: 6px 4px 8px;
+    line-height: 1.2;
+    padding: 8px 6px 10px;
   }
 
   .placeholder {
     aspect-ratio: 310 / 172;
     border: 1px dashed #444;
-    border-radius: 4px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: var(--muted);
-    font-size: 12px;
+    font-size: 13px;
     padding: 12px;
   }
 
@@ -87,13 +95,16 @@
   .lightbox video { width: auto; height: auto; max-width: 92vw; max-height: 92vh; object-fit: contain; cursor: zoom-out; }
 
   /* Narrow screens: one actuator/hands pair per row */
-  @media (max-width: 1150px) {
-    .grid { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+  @media (max-width: 900px) {
+    body { padding: 24px 16px; }
+    .grid { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); column-gap: 12px; row-gap: 24px; }
     .grid > :nth-child(n) { grid-column: auto; }
   }
 </style>
 </head>
 <body>
+  <h1>Textile Pneumatic Actuators for Mechanotherapy</h1>
+
   <main class="grid">
     <figure class="actuator">
       <video src="videos/effleurage_actuator.mp4" autoplay muted loop playsinline></video>
@@ -120,7 +131,7 @@
       <video src="videos/tapotement_hands.mp4" autoplay muted loop playsinline></video>
       <figcaption>3. Tapotement with massage hands</figcaption>
     </figure>
-    <figure class="actuator" id="friction-actuator">
+    <figure class="actuator">
       <video src="videos/friction_actuator.mp4" autoplay muted loop playsinline></video>
       <figcaption>4. Friction Actuator</figcaption>
     </figure>
@@ -133,7 +144,7 @@
   <div class="lightbox" id="lightbox"><video muted loop playsinline controls></video></div>
 
 <script>
-  // If a clip is missing (e.g. friction_actuator.mp4 not added yet), show a placeholder.
+  // If a clip is missing, show a placeholder instead of a broken player.
   document.querySelectorAll('main video').forEach(function (v) {
     v.addEventListener('error', function () {
       var p = document.createElement('div');
