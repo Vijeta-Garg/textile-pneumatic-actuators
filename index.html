@@ -52,6 +52,8 @@
 
   /* Actuator tiles: video with a plain white caption beneath */
   .actuator video { aspect-ratio: 310 / 172; border-radius: 6px; }
+  /* Portrait clips: show the whole frame instead of cropping it */
+  .actuator video.portrait { object-fit: contain; }
   .actuator figcaption {
     font-size: clamp(14px, 1.15vw, 18px);
     text-align: center;
@@ -115,7 +117,7 @@
       <figcaption>1. Effleurage with massage hands</figcaption>
     </figure>
     <figure class="actuator">
-      <video src="videos/petrissage_actuator.mp4" autoplay muted loop playsinline></video>
+      <video class="portrait" src="videos/petrissage_actuator.mp4?v=82385" autoplay muted loop playsinline></video>
       <figcaption>2. Petrissage Actuator</figcaption>
     </figure>
     <figure class="hands">
