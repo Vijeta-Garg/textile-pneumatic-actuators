@@ -11,7 +11,7 @@ Open `index.html` in a browser. All clips autoplay, muted and looping. Click a c
 |---|---|---|
 | 1. Effleurage Actuator | `effleurage_actuator.mp4` | New clip (82394.mp4), re-encoded to H.264 |
 | 1. Effleurage with massage hands | `effleurage_hands.mp4` | Cut from the original composite video |
-| 2. Petrissage Actuator | `petrissage_actuator.mp4` | Cut from the original composite video |
+| 2. Petrissage Actuator | `petrissage_actuator.mp4` | New clip (82385.mp4), rotated to landscape, cropped, re-encoded to H.264 |
 | 2. Petrissage with massage hands | `petrissage_hands.mp4` | Cut from the original composite video |
 | 3. Tapotement Actuator | `tapotement_actuator.mp4` | New clip (Google Drive, Nov 2026), rotated to landscape, cropped, re-encoded to H.264 |
 | 3. Tapotement with massage hands | `tapotement_hands.mp4` | Cut from the original composite video |
